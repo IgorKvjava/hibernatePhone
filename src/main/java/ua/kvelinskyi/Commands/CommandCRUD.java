@@ -1,6 +1,7 @@
 package ua.kvelinskyi.Commands;
 
 import ua.kvelinskyi.Dao.impl.GenericDaoHibernateImpl;
+import ua.kvelinskyi.entitys.PhoneBookEntity;
 import ua.kvelinskyi.entitys.UsersEntity;
 
 public class CommandCRUD {
@@ -14,4 +15,15 @@ public class CommandCRUD {
         GenericDaoHibernateImpl<UsersEntity,Integer> genericDaoHibernate = new GenericDaoHibernateImpl<>(UsersEntity.class);
         genericDaoHibernate.create(usersEntity);
     }
+
+    public void CreatePhoneBook(PhoneBookEntity phoneBookEntity){
+        GenericDaoHibernateImpl<PhoneBookEntity,Integer> genericDaoHibernate = new GenericDaoHibernateImpl<>(PhoneBookEntity.class);
+        genericDaoHibernate.create(phoneBookEntity);
+    }
+
+    public void CloseEntitymanager(GenericDaoHibernateImpl genericDaoHibernate){
+        genericDaoHibernate.CloseEntitymanager();
+    }
+
+
 }

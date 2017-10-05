@@ -1,6 +1,7 @@
 package ua.kvelinskyi.Commands;
 
 import ua.kvelinskyi.Dao.impl.GenericDaoHibernateImpl;
+import ua.kvelinskyi.Dao.interfaces.GenericDao;
 import ua.kvelinskyi.entitys.UsersEntity;
 import java.util.List;
 
@@ -12,4 +13,5 @@ public class CommandListUsers {
         usersEntitiesList = genericDaoHibernate.getAll();
         return usersEntitiesList;
     }
+
 }

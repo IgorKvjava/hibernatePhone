@@ -1,5 +1,6 @@
 import ua.kvelinskyi.Commands.CommandCRUD;
 import ua.kvelinskyi.Commands.CommandListUsers;
+import ua.kvelinskyi.Dao.impl.GenericDaoHibernateImpl;
 import ua.kvelinskyi.HibernateSessionFactory;
 import ua.kvelinskyi.entitys.PhoneBookEntity;
 import ua.kvelinskyi.entitys.UsersEntity;
@@ -26,17 +27,27 @@ public class Main {
 
         entityManager.close();*/
 
-        HibernateSessionFactory hibernateSessionFactory = new HibernateSessionFactory();
         CommandListUsers commandListUsers = new CommandListUsers();
         CommandCRUD commandCRUD = new CommandCRUD();
         System.out.println("1-----------------------------------------");
-        UsersEntity usersEntity = new UsersEntity("login2", "password", "userName", "user");
-        commandCRUD.CreateUser(usersEntity);
-        System.out.println("2-----------------------------------------");
-        List list = commandListUsers.listAllUsers();
 
+//        UsersEntity usersEntity = new UsersEntity("login2", "password", "userName", "user");
+//        commandCRUD.CreateUser(usersEntity);
+
+//        PhoneBookEntity phoneBookEntity = new PhoneBookEntity();
+        System.out.println("2-----------------------------------------");
+        HibernateSessionFactory.getInstance().createEntityManager();
+        List list = commandListUsers.listAllUsers();
+        HibernateSessionFactory.getInstance().getEntityManager().close();
+
+        System.out.println("3-----------------------------------------");
+        HibernateSessionFactory.getInstance().createEntityManager();
+        List list2 = commandListUsers.listAllUsers();
+       // HibernateSessionFactory.getInstance().getEntityManager().close();
         list.forEach(System.out::println);
-        hibernateSessionFactory.shutdown();
+        list2.forEach(System.out::println);
+
+        HibernateSessionFactory.getInstance().EndSessionFactory();
 
 
     }

@@ -1,9 +1,14 @@
 package ua.kvelinskyi.entitys;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "phone_books", schema = "phonebase")
+@Cacheable
+// do cache on user table
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class PhoneBookEntity {
     private int id;
     private int idUser;

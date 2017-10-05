@@ -14,16 +14,21 @@ import java.util.List;
 
 public class GenericDaoHibernateImpl <T, PK extends Serializable>
         implements GenericDao<T, PK> {
-        private SessionFactory sessionFactory;
+       // private SessionFactory sessionFactory;
         private EntityManager entityManager;
         private CriteriaBuilder criteriaBuilder;
         private Class anyClass;
 
     public GenericDaoHibernateImpl(Class anyClass) {
         this.anyClass = anyClass;
-        this.sessionFactory = HibernateSessionFactory.getSessionFactory();
-        entityManager = sessionFactory.createEntityManager();
+        //this.sessionFactory = HibernateSessionFactory.getInstance().getSessionFactory();
+        entityManager = HibernateSessionFactory.getInstance().getEntityManager();
         criteriaBuilder = entityManager.getCriteriaBuilder();
+    }
+
+
+    public void CloseEntitymanager(){
+        entityManager.close();
     }
 
     @Override
@@ -41,6 +46,9 @@ public class GenericDaoHibernateImpl <T, PK extends Serializable>
 
     @Override
     public void update(T transientObject) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(transientObject);
+        entityManager.getTransaction().commit();
 
     }
 
@@ -57,7 +65,7 @@ public class GenericDaoHibernateImpl <T, PK extends Serializable>
         Root<T> root = criteriaQuery.from(anyClass);
         TypedQuery<T> typedQuery =
                 entityManager.createQuery(criteriaQuery);
-        List<T> resultList = (List<T>) typedQuery.getResultList();
+        List<T> resultList =   typedQuery.getResultList();
         return resultList;
     }
 }

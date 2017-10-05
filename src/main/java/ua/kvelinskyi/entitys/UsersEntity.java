@@ -1,6 +1,8 @@
 package ua.kvelinskyi.entitys;
 
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.annotation.Generated;
 import javax.persistence.*;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "phonebase")
+@Cacheable
+// do cache on user table
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UsersEntity {
     private int id;
     private String login;
