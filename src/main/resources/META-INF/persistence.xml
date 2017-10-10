@@ -21,7 +21,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
 
-            <!-- use ehcache provider-->
+             <!--use ehcache provider-->
             <property name="hibernate.cache.region.factory_class"
                       value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
             <property name="hibernate.javax.cache.provider"
