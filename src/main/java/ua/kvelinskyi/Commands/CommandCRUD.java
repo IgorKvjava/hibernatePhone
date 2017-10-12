@@ -21,9 +21,7 @@ public class CommandCRUD {
         genericDaoHibernate.create(phoneBookEntity);
     }
 
-    public void CloseEntitymanager(GenericDaoHibernateImpl genericDaoHibernate){
-        genericDaoHibernate.CloseEntitymanager();
-    }
+
 
 
 }

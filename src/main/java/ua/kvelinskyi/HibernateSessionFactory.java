@@ -19,10 +19,6 @@ public class HibernateSessionFactory {
                         ("org.hibernate.tutorial.jpa");
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
     public EntityManager getEntityManager() {
         return entityManager;
     }
@@ -31,7 +27,11 @@ public class HibernateSessionFactory {
         entityManager = sessionFactory.createEntityManager();
     }
 
-    public void EndSessionFactory(){
+    public void endEntityManager(){
+        entityManager.close();
+    }
+
+    public void endSessionFactory(){
         sessionFactory.close();
     }
 }

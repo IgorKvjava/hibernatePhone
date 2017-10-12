@@ -1,10 +1,7 @@
-import ua.kvelinskyi.Commands.CommandCRUD;
-import ua.kvelinskyi.Commands.CommandListUsers;
-import ua.kvelinskyi.Dao.impl.GenericDaoHibernateImpl;
-import ua.kvelinskyi.HibernateSessionFactory;
-import ua.kvelinskyi.entitys.PhoneBookEntity;
-import ua.kvelinskyi.entitys.UsersEntity;
 
+import ua.kvelinskyi.Commands.CommandListUsers;
+import ua.kvelinskyi.HibernateSessionFactory;
+import ua.kvelinskyi.entitys.UsersEntity;
 import java.util.List;
 
 public class Main {
@@ -27,27 +24,52 @@ public class Main {
 
         entityManager.close();*/
 
-        CommandListUsers commandListUsers = new CommandListUsers();
-        CommandCRUD commandCRUD = new CommandCRUD();
-        System.out.println("1-----------------------------------------");
+
 
 //        UsersEntity usersEntity = new UsersEntity("login2", "password", "userName", "user");
 //        commandCRUD.CreateUser(usersEntity);
-
+//CommandCRUD commandCRUD = new CommandCRUD();
 //        PhoneBookEntity phoneBookEntity = new PhoneBookEntity();
-        System.out.println("2-----------------------------------------");
+       /* System.out.println("2-----------------------------------------");
         HibernateSessionFactory.getInstance().createEntityManager();
-        List list = commandListUsers.listAllUsers();
-        HibernateSessionFactory.getInstance().getEntityManager().close();
+
+        EntityManager e = HibernateSessionFactory.getInstance().getEntityManager();
+
+        e.getTransaction().begin();
+        UsersEntity u = (UsersEntity) e.createQuery("select u from UsersEntity u where u.id=1").getResultList().get(0);
+
+        System.out.println(u);
+        e.getTransaction().commit();
+        e.close();
+
+        HibernateSessionFactory.getInstance().createEntityManager();
+
+        e = HibernateSessionFactory.getInstance().getEntityManager();
+
+        e.getTransaction().begin();
+        UsersEntity u1 = (UsersEntity) e.createQuery("select u from UsersEntity u where u.id=1").getResultList().get(0);
+
+        System.out.println(u1);
+        e.getTransaction().commit();
+e.close();*/
+
+        HibernateSessionFactory.getInstance().createEntityManager();
+        CommandListUsers commandListUsers = new CommandListUsers();
+        System.out.println("1-----------------------------------------");
+        List<UsersEntity> list = commandListUsers.listAllUsers();
+        HibernateSessionFactory.getInstance().endEntityManager();
 
         System.out.println("3-----------------------------------------");
         HibernateSessionFactory.getInstance().createEntityManager();
-        List list2 = commandListUsers.listAllUsers();
-       // HibernateSessionFactory.getInstance().getEntityManager().close();
+        //UsersEntity usersEntity1= HibernateSessionFactory.getInstance().getEntityManager().find(UsersEntity.class,1);
+        //UsersEntity usersEntity2= HibernateSessionFactory.getInstance().getEntityManager().find(UsersEntity.class,2);
+        //UsersEntity usersEntity3= HibernateSessionFactory.getInstance().getEntityManager().find(UsersEntity.class,3);
+        List<UsersEntity> list2 = commandListUsers.listAllUsers();
+        HibernateSessionFactory.getInstance().endEntityManager();
         list.forEach(System.out::println);
         list2.forEach(System.out::println);
 
-        HibernateSessionFactory.getInstance().EndSessionFactory();
+        HibernateSessionFactory.getInstance().endSessionFactory();
 
 
     }
